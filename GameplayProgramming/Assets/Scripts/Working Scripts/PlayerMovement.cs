@@ -30,7 +30,7 @@ public class PlayerMovement : MonoBehaviour
 
     Vector3 motion;
     Vector3 moveDir;
-    public float Gravity;
+    public float gravity;
     private float yDirection;
     private float jumpNo;
 
@@ -76,7 +76,6 @@ public class PlayerMovement : MonoBehaviour
 
         if(controller.isGrounded)
         {
-            print("yes");
             yDirection = 0f;
             jumpNo = 0;
             Anim.SetBool("IsJumping", false);
@@ -110,12 +109,12 @@ public class PlayerMovement : MonoBehaviour
 
         if(speedBoost)
         {
-            speed = 20;
+            speed = 10;
             speedBoostTimer -= Time.deltaTime;
             particleEffect.SetActive(true);
             if(speedBoostTimer <= 0)
             {
-                speed = 10;
+                speed = 5;
                 speedBoost = false;
                 speedBoostTimer = 3;
                 particleEffect.SetActive(false);
@@ -124,7 +123,7 @@ public class PlayerMovement : MonoBehaviour
 
         if(doublejump)
         {
-
+            
         }
 
 
@@ -135,12 +134,9 @@ public class PlayerMovement : MonoBehaviour
             Anim.SetBool("IsJumping", true);
         }
 
-        if (Input.GetButtonDown("Jump"))
-        {
-            velocity.y = Mathf.Sqrt(jumpHeight * -2 * Gravity);
-        }
+       
 
-        yDirection -= Gravity * Time.deltaTime;
+        yDirection -= gravity * Time.deltaTime;
         motion.y = yDirection;
         controller.Move(motion);
 
