@@ -111,7 +111,7 @@ public class PlayerMovement : MonoBehaviour
 
         if(speedBoost)
         {
-            speed = 10;
+            speed = 15;
             speedBoostTimer -= Time.deltaTime;
             TrailEffect.emitting = true;
             if(speedBoostTimer <= 0)
