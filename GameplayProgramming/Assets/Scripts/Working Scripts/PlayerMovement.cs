@@ -11,7 +11,8 @@ public class PlayerMovement : MonoBehaviour
 
     public CharacterController controller;
     public Transform cam;
-    public GameObject particleEffect;
+    public TrailRenderer TrailEffect;
+    public GameObject ParticleEffect;
 
     Animator Anim;
     PlayerControls controls;
@@ -31,11 +32,12 @@ public class PlayerMovement : MonoBehaviour
     Vector3 motion;
     Vector3 moveDir;
     public float gravity;
-    private float yDirection;
-    private float jumpNo;
+    public float yDirection;
+    public float jumpNo;
 
     //jumping
-    float jumpHeight; 
+    private float JumpCount = 1;
+    private float doublejumpTimer = 4;
 
     void Awake()
     {
@@ -51,10 +53,10 @@ public class PlayerMovement : MonoBehaviour
         controls.Player.DefaultActionRoll.performed += Roll;
 
         controls.Player.CombatAction.performed += Attack;
+
     }
     void Start()
     {
-        particleEffect.SetActive(false);
 
     }
     private void OnMove(InputValue movementValue)
@@ -111,30 +113,37 @@ public class PlayerMovement : MonoBehaviour
         {
             speed = 10;
             speedBoostTimer -= Time.deltaTime;
-            particleEffect.SetActive(true);
+            TrailEffect.emitting = true;
             if(speedBoostTimer <= 0)
             {
                 speed = 5;
                 speedBoost = false;
                 speedBoostTimer = 3;
-                particleEffect.SetActive(false);
+                TrailEffect.emitting = false;
             }
         }
 
-        if(doublejump)
+        if (doublejump)
         {
-            
+            JumpCount = 2;
+            doublejumpTimer -= Time.deltaTime;
+            ParticleEffect.SetActive(true);
+            if (doublejumpTimer <= 0)
+            {
+                JumpCount = 1;
+                doublejumpTimer = 4;
+                doublejump = false;
+                ParticleEffect.SetActive(false);
+            }
         }
 
-
-        if (Input.GetButtonDown("Jump") && jumpNo < 1)
+        if (Input.GetButtonDown("Jump") && jumpNo < JumpCount)
         {
             yDirection = ySpeed;
             jumpNo += 1;
             Anim.SetBool("IsJumping", true);
         }
 
-       
 
         yDirection -= gravity * Time.deltaTime;
         motion.y = yDirection;
