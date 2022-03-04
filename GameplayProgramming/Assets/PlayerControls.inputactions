@@ -6,7 +6,7 @@
             "id": "7ae87c56-8792-445f-91dc-8a64dd1f2916",
             "actions": [
                 {
-                    "name": "CombatAction",
+                    "name": "DefaultActionRoll",
                     "type": "Button",
                     "id": "fa83072a-885a-4c16-9ecf-7ebe857809ee",
                     "expectedControlType": "Button",
@@ -41,6 +41,14 @@
                     "name": "Jump",
                     "type": "Button",
                     "id": "4a72d598-68ac-4978-af75-1461087032e5",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "CombatAction",
+                    "type": "Button",
+                    "id": "d830bee8-8e27-4d16-8688-7427d457775b",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
@@ -138,11 +146,11 @@
                 {
                     "name": "",
                     "id": "ee177325-6540-4e27-a7e2-a847908e2905",
-                    "path": "<Gamepad>/dpad/left",
+                    "path": "<Gamepad>/buttonEast",
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
-                    "action": "CombatAction",
+                    "action": "DefaultActionRoll",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -176,6 +184,17 @@
                     "processors": "",
                     "groups": "Keyboard&Mouse",
                     "action": "Jump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "417ed3b9-b119-4de7-8ee0-e2e750e18cc3",
+                    "path": "<Gamepad>/buttonNorth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "CombatAction",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
@@ -682,6 +701,44 @@
                     "processors": "",
                     "groups": "XR",
                     "action": "TrackedDeviceOrientation",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "Mouse",
+            "id": "7ccdef08-dd0c-4812-a98a-64fa570665f5",
+            "actions": [
+                {
+                    "name": "CameraLook",
+                    "type": "PassThrough",
+                    "id": "7d5827a2-f230-4bcd-971e-b27ab8db4fed",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "f588080a-c720-4f72-aaa7-bcee20542f4d",
+                    "path": "<Mouse>/delta",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "CameraLook",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e7eeca86-fb0e-4a74-a51b-85bc45dbf511",
+                    "path": "<Gamepad>/rightStick",
+                    "interactions": "",
+                    "processors": "ScaleVector2(x=20,y=15)",
+                    "groups": "",
+                    "action": "CameraLook",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

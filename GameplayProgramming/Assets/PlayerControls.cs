@@ -19,7 +19,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
             ""id"": ""7ae87c56-8792-445f-91dc-8a64dd1f2916"",
             ""actions"": [
                 {
-                    ""name"": ""CombatAction"",
+                    ""name"": ""DefaultActionRoll"",
                     ""type"": ""Button"",
                     ""id"": ""fa83072a-885a-4c16-9ecf-7ebe857809ee"",
                     ""expectedControlType"": ""Button"",
@@ -54,6 +54,14 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""name"": ""Jump"",
                     ""type"": ""Button"",
                     ""id"": ""4a72d598-68ac-4978-af75-1461087032e5"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""CombatAction"",
+                    ""type"": ""Button"",
+                    ""id"": ""d830bee8-8e27-4d16-8688-7427d457775b"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
@@ -151,11 +159,11 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""ee177325-6540-4e27-a7e2-a847908e2905"",
-                    ""path"": ""<Gamepad>/dpad/left"",
+                    ""path"": ""<Gamepad>/buttonEast"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
-                    ""action"": ""CombatAction"",
+                    ""action"": ""DefaultActionRoll"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -189,6 +197,17 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
                     ""action"": ""Jump"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""417ed3b9-b119-4de7-8ee0-e2e750e18cc3"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""CombatAction"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -699,6 +718,44 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Mouse"",
+            ""id"": ""7ccdef08-dd0c-4812-a98a-64fa570665f5"",
+            ""actions"": [
+                {
+                    ""name"": ""CameraLook"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""7d5827a2-f230-4bcd-971e-b27ab8db4fed"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""f588080a-c720-4f72-aaa7-bcee20542f4d"",
+                    ""path"": ""<Mouse>/delta"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CameraLook"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e7eeca86-fb0e-4a74-a51b-85bc45dbf511"",
+                    ""path"": ""<Gamepad>/rightStick"",
+                    ""interactions"": """",
+                    ""processors"": ""ScaleVector2(x=20,y=15)"",
+                    ""groups"": """",
+                    ""action"": ""CameraLook"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -766,11 +823,12 @@ public class @PlayerControls : IInputActionCollection, IDisposable
 }");
         // Player
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
-        m_Player_CombatAction = m_Player.FindAction("CombatAction", throwIfNotFound: true);
+        m_Player_DefaultActionRoll = m_Player.FindAction("DefaultActionRoll", throwIfNotFound: true);
         m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
         m_Player_Menu = m_Player.FindAction("Menu", throwIfNotFound: true);
         m_Player_Camera = m_Player.FindAction("Camera", throwIfNotFound: true);
         m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
+        m_Player_CombatAction = m_Player.FindAction("CombatAction", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -783,6 +841,9 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         m_UI_RightClick = m_UI.FindAction("RightClick", throwIfNotFound: true);
         m_UI_TrackedDevicePosition = m_UI.FindAction("TrackedDevicePosition", throwIfNotFound: true);
         m_UI_TrackedDeviceOrientation = m_UI.FindAction("TrackedDeviceOrientation", throwIfNotFound: true);
+        // Mouse
+        m_Mouse = asset.FindActionMap("Mouse", throwIfNotFound: true);
+        m_Mouse_CameraLook = m_Mouse.FindAction("CameraLook", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -832,20 +893,22 @@ public class @PlayerControls : IInputActionCollection, IDisposable
     // Player
     private readonly InputActionMap m_Player;
     private IPlayerActions m_PlayerActionsCallbackInterface;
-    private readonly InputAction m_Player_CombatAction;
+    private readonly InputAction m_Player_DefaultActionRoll;
     private readonly InputAction m_Player_Move;
     private readonly InputAction m_Player_Menu;
     private readonly InputAction m_Player_Camera;
     private readonly InputAction m_Player_Jump;
+    private readonly InputAction m_Player_CombatAction;
     public struct PlayerActions
     {
         private @PlayerControls m_Wrapper;
         public PlayerActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
-        public InputAction @CombatAction => m_Wrapper.m_Player_CombatAction;
+        public InputAction @DefaultActionRoll => m_Wrapper.m_Player_DefaultActionRoll;
         public InputAction @Move => m_Wrapper.m_Player_Move;
         public InputAction @Menu => m_Wrapper.m_Player_Menu;
         public InputAction @Camera => m_Wrapper.m_Player_Camera;
         public InputAction @Jump => m_Wrapper.m_Player_Jump;
+        public InputAction @CombatAction => m_Wrapper.m_Player_CombatAction;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -855,9 +918,9 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         {
             if (m_Wrapper.m_PlayerActionsCallbackInterface != null)
             {
-                @CombatAction.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCombatAction;
-                @CombatAction.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCombatAction;
-                @CombatAction.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCombatAction;
+                @DefaultActionRoll.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDefaultActionRoll;
+                @DefaultActionRoll.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDefaultActionRoll;
+                @DefaultActionRoll.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDefaultActionRoll;
                 @Move.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMove;
                 @Move.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMove;
                 @Move.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMove;
@@ -870,13 +933,16 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @Jump.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJump;
                 @Jump.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJump;
                 @Jump.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJump;
+                @CombatAction.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCombatAction;
+                @CombatAction.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCombatAction;
+                @CombatAction.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCombatAction;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
             {
-                @CombatAction.started += instance.OnCombatAction;
-                @CombatAction.performed += instance.OnCombatAction;
-                @CombatAction.canceled += instance.OnCombatAction;
+                @DefaultActionRoll.started += instance.OnDefaultActionRoll;
+                @DefaultActionRoll.performed += instance.OnDefaultActionRoll;
+                @DefaultActionRoll.canceled += instance.OnDefaultActionRoll;
                 @Move.started += instance.OnMove;
                 @Move.performed += instance.OnMove;
                 @Move.canceled += instance.OnMove;
@@ -889,6 +955,9 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @Jump.started += instance.OnJump;
                 @Jump.performed += instance.OnJump;
                 @Jump.canceled += instance.OnJump;
+                @CombatAction.started += instance.OnCombatAction;
+                @CombatAction.performed += instance.OnCombatAction;
+                @CombatAction.canceled += instance.OnCombatAction;
             }
         }
     }
@@ -998,6 +1067,39 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         }
     }
     public UIActions @UI => new UIActions(this);
+
+    // Mouse
+    private readonly InputActionMap m_Mouse;
+    private IMouseActions m_MouseActionsCallbackInterface;
+    private readonly InputAction m_Mouse_CameraLook;
+    public struct MouseActions
+    {
+        private @PlayerControls m_Wrapper;
+        public MouseActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @CameraLook => m_Wrapper.m_Mouse_CameraLook;
+        public InputActionMap Get() { return m_Wrapper.m_Mouse; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(MouseActions set) { return set.Get(); }
+        public void SetCallbacks(IMouseActions instance)
+        {
+            if (m_Wrapper.m_MouseActionsCallbackInterface != null)
+            {
+                @CameraLook.started -= m_Wrapper.m_MouseActionsCallbackInterface.OnCameraLook;
+                @CameraLook.performed -= m_Wrapper.m_MouseActionsCallbackInterface.OnCameraLook;
+                @CameraLook.canceled -= m_Wrapper.m_MouseActionsCallbackInterface.OnCameraLook;
+            }
+            m_Wrapper.m_MouseActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @CameraLook.started += instance.OnCameraLook;
+                @CameraLook.performed += instance.OnCameraLook;
+                @CameraLook.canceled += instance.OnCameraLook;
+            }
+        }
+    }
+    public MouseActions @Mouse => new MouseActions(this);
     private int m_KeyboardMouseSchemeIndex = -1;
     public InputControlScheme KeyboardMouseScheme
     {
@@ -1045,11 +1147,12 @@ public class @PlayerControls : IInputActionCollection, IDisposable
     }
     public interface IPlayerActions
     {
-        void OnCombatAction(InputAction.CallbackContext context);
+        void OnDefaultActionRoll(InputAction.CallbackContext context);
         void OnMove(InputAction.CallbackContext context);
         void OnMenu(InputAction.CallbackContext context);
         void OnCamera(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
+        void OnCombatAction(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {
@@ -1063,5 +1166,9 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         void OnRightClick(InputAction.CallbackContext context);
         void OnTrackedDevicePosition(InputAction.CallbackContext context);
         void OnTrackedDeviceOrientation(InputAction.CallbackContext context);
+    }
+    public interface IMouseActions
+    {
+        void OnCameraLook(InputAction.CallbackContext context);
     }
 }

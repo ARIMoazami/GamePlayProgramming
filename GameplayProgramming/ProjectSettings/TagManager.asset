@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Shadow
   - Collide
+  - PowerUpsJump
+  - PowerUpsSpeed
   layers:
   - Default
   - TransparentFX
