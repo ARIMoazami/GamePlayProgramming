@@ -5,7 +5,10 @@ using UnityEngine;
 public class DoorButton : MonoBehaviour
 {
     public GameObject UIText;
-    public GameObject Door;
+    public GameObject cutsceneCAM;
+    public GameObject playerCAM;
+
+    public Animator doorAnim;
 
     private bool DoorOpen = false;
     private Animator buttonAnim;
@@ -15,6 +18,8 @@ public class DoorButton : MonoBehaviour
     void Start()
     {
         buttonAnim = GetComponent<Animator>();
+
+        cutsceneCAM.SetActive(false);
 
         UIText.SetActive(false);
     }
@@ -34,15 +39,28 @@ public class DoorButton : MonoBehaviour
         if (InOverlap && !DoorOpen && Input.GetButtonDown("Interact"))
         {
             buttonAnim.SetTrigger("Pressed");
+            cutsceneCAM.SetActive(true);
+            playerCAM.SetActive(false);
+            doorAnim.SetTrigger("OpenDoor");           
+            DoorOpen = true;
             // open door
         }
         else if (InOverlap && DoorOpen && Input.GetButtonDown("Interact"))
         {
             buttonAnim.SetTrigger("Pressed");
+            cutsceneCAM.SetActive(true);
+            playerCAM.SetActive(false);
+            doorAnim.SetTrigger("CloseDoor");
+            DoorOpen = false;
             // close door
         }
-    }
 
+        if(doorAnim.GetCurrentAnimatorStateInfo(0).IsName("Idle"))
+        {
+            cutsceneCAM.SetActive(false);
+            playerCAM.SetActive(true);
+        }
+    }
     private void OnTriggerEnter(Collider other)
     {
         UIText.SetActive(true);

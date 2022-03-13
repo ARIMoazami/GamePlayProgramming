@@ -65,6 +65,14 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""DefaultActionInteract"",
+                    ""type"": ""Button"",
+                    ""id"": ""23d41acc-9990-4da1-9e2f-c476c1548383"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -208,6 +216,17 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
                     ""action"": ""CombatAction"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5da613a7-fb5c-4e09-99ec-6279ce2b78bf"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""DefaultActionInteract"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -829,6 +848,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         m_Player_Camera = m_Player.FindAction("Camera", throwIfNotFound: true);
         m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
         m_Player_CombatAction = m_Player.FindAction("CombatAction", throwIfNotFound: true);
+        m_Player_DefaultActionInteract = m_Player.FindAction("DefaultActionInteract", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -899,6 +919,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
     private readonly InputAction m_Player_Camera;
     private readonly InputAction m_Player_Jump;
     private readonly InputAction m_Player_CombatAction;
+    private readonly InputAction m_Player_DefaultActionInteract;
     public struct PlayerActions
     {
         private @PlayerControls m_Wrapper;
@@ -909,6 +930,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         public InputAction @Camera => m_Wrapper.m_Player_Camera;
         public InputAction @Jump => m_Wrapper.m_Player_Jump;
         public InputAction @CombatAction => m_Wrapper.m_Player_CombatAction;
+        public InputAction @DefaultActionInteract => m_Wrapper.m_Player_DefaultActionInteract;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -936,6 +958,9 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @CombatAction.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCombatAction;
                 @CombatAction.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCombatAction;
                 @CombatAction.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCombatAction;
+                @DefaultActionInteract.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDefaultActionInteract;
+                @DefaultActionInteract.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDefaultActionInteract;
+                @DefaultActionInteract.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDefaultActionInteract;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -958,6 +983,9 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @CombatAction.started += instance.OnCombatAction;
                 @CombatAction.performed += instance.OnCombatAction;
                 @CombatAction.canceled += instance.OnCombatAction;
+                @DefaultActionInteract.started += instance.OnDefaultActionInteract;
+                @DefaultActionInteract.performed += instance.OnDefaultActionInteract;
+                @DefaultActionInteract.canceled += instance.OnDefaultActionInteract;
             }
         }
     }
@@ -1153,6 +1181,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         void OnCamera(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
         void OnCombatAction(InputAction.CallbackContext context);
+        void OnDefaultActionInteract(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

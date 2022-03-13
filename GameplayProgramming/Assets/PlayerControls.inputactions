@@ -52,6 +52,14 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "DefaultActionInteract",
+                    "type": "Button",
+                    "id": "23d41acc-9990-4da1-9e2f-c476c1548383",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -195,6 +203,17 @@
                     "processors": "",
                     "groups": "Gamepad",
                     "action": "CombatAction",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5da613a7-fb5c-4e09-99ec-6279ce2b78bf",
+                    "path": "<Gamepad>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "DefaultActionInteract",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

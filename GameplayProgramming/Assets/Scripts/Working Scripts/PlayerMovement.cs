@@ -54,6 +54,8 @@ public class PlayerMovement : MonoBehaviour
 
         controls.Player.CombatAction.performed += Attack;
 
+        controls.Player.DefaultActionInteract.performed += Interact;
+
     }
     void Start()
     {
@@ -174,5 +176,10 @@ public class PlayerMovement : MonoBehaviour
     void Attack(InputAction.CallbackContext context)
     {
         Anim.SetTrigger("Attack");
+    }
+
+    void Interact(InputAction.CallbackContext context)
+    {
+        Anim.SetTrigger("Interact");
     }
 }
