@@ -11,6 +11,7 @@ public class DoorButton : MonoBehaviour
     public Animator doorAnim;
 
     private bool DoorOpen = false;
+    private bool TimerOn = false;
     private Animator buttonAnim;
 
 
@@ -22,6 +23,8 @@ public class DoorButton : MonoBehaviour
         cutsceneCAM.SetActive(false);
 
         UIText.SetActive(false);
+
+       
     }
 
     private bool InOverlap
@@ -41,26 +44,29 @@ public class DoorButton : MonoBehaviour
             buttonAnim.SetTrigger("Pressed");
             cutsceneCAM.SetActive(true);
             playerCAM.SetActive(false);
-            doorAnim.SetTrigger("OpenDoor");           
+            doorAnim.Play("DoorOpen");
             DoorOpen = true;
-            // open door
+            StartCoroutine(camReturn());
         }
         else if (InOverlap && DoorOpen && Input.GetButtonDown("Interact"))
         {
             buttonAnim.SetTrigger("Pressed");
             cutsceneCAM.SetActive(true);
             playerCAM.SetActive(false);
-            doorAnim.SetTrigger("CloseDoor");
+            doorAnim.Play("DoorClose");
             DoorOpen = false;
-            // close door
+            StartCoroutine(camReturn());
         }
 
-        if(doorAnim.GetCurrentAnimatorStateInfo(0).IsName("Idle"))
-        {
-            cutsceneCAM.SetActive(false);
-            playerCAM.SetActive(true);
-        }
     }
+
+    IEnumerator camReturn()
+    {
+        yield return new WaitForSeconds(2);
+        cutsceneCAM.SetActive(false);
+        playerCAM.SetActive(true);
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         UIText.SetActive(true);
