@@ -44,6 +44,25 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
+<<<<<<< Updated upstream
+=======
+                },
+                {
+                    "name": "CombatAction",
+                    "type": "Button",
+                    "id": "d830bee8-8e27-4d16-8688-7427d457775b",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "DefaultActionInteract",
+                    "type": "Button",
+                    "id": "5b9344f5-246d-41d7-bff6-7f597e74f760",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+>>>>>>> Stashed changes
                 }
             ],
             "bindings": [
@@ -178,6 +197,31 @@
                     "action": "Jump",
                     "isComposite": false,
                     "isPartOfComposite": false
+<<<<<<< Updated upstream
+=======
+                },
+                {
+                    "name": "",
+                    "id": "417ed3b9-b119-4de7-8ee0-e2e750e18cc3",
+                    "path": "<Gamepad>/buttonNorth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "CombatAction",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "72140c40-e489-46b0-9ac3-f54834d85b14",
+                    "path": "<Gamepad>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "DefaultActionInteract",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+>>>>>>> Stashed changes
                 }
             ]
         },

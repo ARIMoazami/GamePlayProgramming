@@ -57,6 +57,25 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+<<<<<<< Updated upstream
+=======
+                },
+                {
+                    ""name"": ""CombatAction"",
+                    ""type"": ""Button"",
+                    ""id"": ""d830bee8-8e27-4d16-8688-7427d457775b"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""DefaultActionInteract"",
+                    ""type"": ""Button"",
+                    ""id"": ""5b9344f5-246d-41d7-bff6-7f597e74f760"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+>>>>>>> Stashed changes
                 }
             ],
             ""bindings"": [
@@ -191,6 +210,31 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""action"": ""Jump"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+<<<<<<< Updated upstream
+=======
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""417ed3b9-b119-4de7-8ee0-e2e750e18cc3"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""CombatAction"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""72140c40-e489-46b0-9ac3-f54834d85b14"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""DefaultActionInteract"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+>>>>>>> Stashed changes
                 }
             ]
         },
@@ -771,6 +815,11 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         m_Player_Menu = m_Player.FindAction("Menu", throwIfNotFound: true);
         m_Player_Camera = m_Player.FindAction("Camera", throwIfNotFound: true);
         m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
+<<<<<<< Updated upstream
+=======
+        m_Player_CombatAction = m_Player.FindAction("CombatAction", throwIfNotFound: true);
+        m_Player_DefaultActionInteract = m_Player.FindAction("DefaultActionInteract", throwIfNotFound: true);
+>>>>>>> Stashed changes
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -837,6 +886,11 @@ public class @PlayerControls : IInputActionCollection, IDisposable
     private readonly InputAction m_Player_Menu;
     private readonly InputAction m_Player_Camera;
     private readonly InputAction m_Player_Jump;
+<<<<<<< Updated upstream
+=======
+    private readonly InputAction m_Player_CombatAction;
+    private readonly InputAction m_Player_DefaultActionInteract;
+>>>>>>> Stashed changes
     public struct PlayerActions
     {
         private @PlayerControls m_Wrapper;
@@ -846,6 +900,11 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         public InputAction @Menu => m_Wrapper.m_Player_Menu;
         public InputAction @Camera => m_Wrapper.m_Player_Camera;
         public InputAction @Jump => m_Wrapper.m_Player_Jump;
+<<<<<<< Updated upstream
+=======
+        public InputAction @CombatAction => m_Wrapper.m_Player_CombatAction;
+        public InputAction @DefaultActionInteract => m_Wrapper.m_Player_DefaultActionInteract;
+>>>>>>> Stashed changes
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -870,6 +929,15 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @Jump.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJump;
                 @Jump.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJump;
                 @Jump.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJump;
+<<<<<<< Updated upstream
+=======
+                @CombatAction.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCombatAction;
+                @CombatAction.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCombatAction;
+                @CombatAction.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCombatAction;
+                @DefaultActionInteract.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDefaultActionInteract;
+                @DefaultActionInteract.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDefaultActionInteract;
+                @DefaultActionInteract.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDefaultActionInteract;
+>>>>>>> Stashed changes
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -889,6 +957,15 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @Jump.started += instance.OnJump;
                 @Jump.performed += instance.OnJump;
                 @Jump.canceled += instance.OnJump;
+<<<<<<< Updated upstream
+=======
+                @CombatAction.started += instance.OnCombatAction;
+                @CombatAction.performed += instance.OnCombatAction;
+                @CombatAction.canceled += instance.OnCombatAction;
+                @DefaultActionInteract.started += instance.OnDefaultActionInteract;
+                @DefaultActionInteract.performed += instance.OnDefaultActionInteract;
+                @DefaultActionInteract.canceled += instance.OnDefaultActionInteract;
+>>>>>>> Stashed changes
             }
         }
     }
@@ -1050,6 +1127,11 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         void OnMenu(InputAction.CallbackContext context);
         void OnCamera(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
+<<<<<<< Updated upstream
+=======
+        void OnCombatAction(InputAction.CallbackContext context);
+        void OnDefaultActionInteract(InputAction.CallbackContext context);
+>>>>>>> Stashed changes
     }
     public interface IUIActions
     {
