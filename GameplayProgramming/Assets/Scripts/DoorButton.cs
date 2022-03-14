@@ -62,7 +62,7 @@ public class DoorButton : MonoBehaviour
 
     IEnumerator camReturn()
     {
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(1);
         cutsceneCAM.SetActive(false);
         playerCAM.SetActive(true);
     }
