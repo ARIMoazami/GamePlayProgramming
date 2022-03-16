@@ -39,6 +39,7 @@ public class PlayerMovement : MonoBehaviour
     private float JumpCount = 1;
     private float doublejumpTimer = 4;
 
+
     void Awake()
     {
         Anim = GetComponent<Animator>();
@@ -75,8 +76,8 @@ public class PlayerMovement : MonoBehaviour
         float horizontal = Input.GetAxisRaw("Horizontal");
         float vertical = Input.GetAxisRaw("Vertical");
 
-        Vector3 direction = new Vector3(moveX, 0f, moveY);
-        controller.SimpleMove(Vector3.forward * 0);
+        Vector3 direction = new Vector3(moveX, 0f, moveY).normalized;
+        //controller.SimpleMove(Vector3.forward * 0);
 
         if(controller.isGrounded)
         {
@@ -93,7 +94,8 @@ public class PlayerMovement : MonoBehaviour
             transform.rotation = Quaternion.Euler(0f, angle, 0f);
 
             Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
-            motion = direction * speed * Time.deltaTime;
+            controller.Move(moveDir.normalized * speed * Time.deltaTime);
+            //motion = direction * speed * Time.deltaTime;
 
             Anim.SetBool("IsRunning", true);
             Anim.SetBool("IsIdle", false);
@@ -155,7 +157,6 @@ public class PlayerMovement : MonoBehaviour
         {
             
         }
-
     }
 
     private void OnTriggerEnter(Collider other)
