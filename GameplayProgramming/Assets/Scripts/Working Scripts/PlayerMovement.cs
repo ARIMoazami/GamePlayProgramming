@@ -151,6 +151,11 @@ public class PlayerMovement : MonoBehaviour
         motion.y = yDirection;
         controller.Move(motion);
 
+        if(Input.GetButtonDown("LockOn"))
+        {
+            
+        }
+
     }
 
     private void OnTriggerEnter(Collider other)
@@ -182,4 +187,7 @@ public class PlayerMovement : MonoBehaviour
     {
         Anim.SetTrigger("Interact");
     }
+
+
+
 }

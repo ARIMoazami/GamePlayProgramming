@@ -8,6 +8,7 @@ TagManager:
   - Collide
   - PowerUpsJump
   - PowerUpsSpeed
+  - Enemy
   layers:
   - Default
   - TransparentFX

@@ -8,10 +8,13 @@ public class DoorButton : MonoBehaviour
     public GameObject cutsceneCAM;
     public GameObject playerCAM;
 
+    public GameObject Player;
+
     public Animator doorAnim;
 
     private bool DoorOpen = false;
-    private bool TimerOn = false;
+    private bool OpenButtonPressed = false;
+    private bool CloseButtonPressed = false;
     private Animator buttonAnim;
 
 
@@ -44,20 +47,19 @@ public class DoorButton : MonoBehaviour
             buttonAnim.SetTrigger("Pressed");
             cutsceneCAM.SetActive(true);
             playerCAM.SetActive(false);
-            doorAnim.Play("DoorOpen");
-            DoorOpen = true;
-            StartCoroutine(camReturn());
+            StartCoroutine(Opening());
+
+            Player.GetComponent<PlayerMovement>().enabled = false;
         }
         else if (InOverlap && DoorOpen && Input.GetButtonDown("Interact"))
         {
             buttonAnim.SetTrigger("Pressed");
             cutsceneCAM.SetActive(true);
             playerCAM.SetActive(false);
-            doorAnim.Play("DoorClose");
-            DoorOpen = false;
-            StartCoroutine(camReturn());
-        }
+            StartCoroutine(Closing());
 
+            Player.GetComponent<PlayerMovement>().enabled = false;
+        }
     }
 
     IEnumerator camReturn()
@@ -65,7 +67,27 @@ public class DoorButton : MonoBehaviour
         yield return new WaitForSeconds(1);
         cutsceneCAM.SetActive(false);
         playerCAM.SetActive(true);
+        Player.GetComponent<PlayerMovement>().enabled = true;
     }
+
+    IEnumerator Opening()
+    {
+        yield return new WaitForSeconds(1);
+        doorAnim.Play("DoorOpen");
+        DoorOpen = true;
+        StartCoroutine(camReturn());
+    }
+
+    IEnumerator Closing()
+    {
+        yield return new WaitForSeconds(1);
+        doorAnim.Play("DoorClose");
+        DoorOpen = false;
+        StartCoroutine(camReturn());
+    }
+
+
+    
 
     private void OnTriggerEnter(Collider other)
     {
