@@ -14,6 +14,10 @@ public class PlayerMovement : MonoBehaviour
     public TrailRenderer TrailEffect;
     public GameObject ParticleEffect;
 
+
+    public GameObject playerCam;
+    public GameObject lockOnCam;
+
     Animator Anim;
     PlayerControls controls;
 
@@ -38,6 +42,8 @@ public class PlayerMovement : MonoBehaviour
     //jumping
     private float JumpCount = 1;
     private float doublejumpTimer = 4;
+
+    private bool EnemyLock = false;
 
 
     void Awake()
@@ -99,6 +105,8 @@ public class PlayerMovement : MonoBehaviour
 
             Anim.SetBool("IsRunning", true);
             Anim.SetBool("IsIdle", false);
+
+           
         }
         else
         {
@@ -153,10 +161,20 @@ public class PlayerMovement : MonoBehaviour
         motion.y = yDirection;
         controller.Move(motion);
 
-        if(Input.GetButtonDown("LockOn"))
+        if(Input.GetButtonDown("LockOn") && !EnemyLock)
         {
-            
+            playerCam.SetActive(false);
+            lockOnCam.SetActive(true);
+            EnemyLock = true;
         }
+        else if(EnemyLock && Input.GetButtonDown("LockOn"))
+        {
+            playerCam.SetActive(true);
+            lockOnCam.SetActive(false);
+            EnemyLock = false;
+        }
+
+
     }
 
     private void OnTriggerEnter(Collider other)
