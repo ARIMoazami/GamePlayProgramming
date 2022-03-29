@@ -13,8 +13,6 @@ public class DoorButton : MonoBehaviour
     public Animator doorAnim;
 
     private bool DoorOpen = false;
-    private bool OpenButtonPressed = false;
-    private bool CloseButtonPressed = false;
     private Animator buttonAnim;
 
 

@@ -9,6 +9,7 @@ TagManager:
   - PowerUpsJump
   - PowerUpsSpeed
   - Enemy
+  - Safepoint
   layers:
   - Default
   - TransparentFX
