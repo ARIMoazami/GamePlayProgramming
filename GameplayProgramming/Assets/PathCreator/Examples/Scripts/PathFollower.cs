@@ -11,6 +11,8 @@ namespace PathCreation.Examples
         public float speed = 5;
         float distanceTravelled;
 
+        public GameObject Player;
+
 
         void Start() {
             if (pathCreator != null)
@@ -27,6 +29,18 @@ namespace PathCreation.Examples
                 distanceTravelled += speed * Time.deltaTime;
                 transform.position = pathCreator.path.GetPointAtDistance(distanceTravelled, endOfPathInstruction);
                 transform.rotation = pathCreator.path.GetRotationAtDistance(distanceTravelled, endOfPathInstruction);
+            }
+
+            
+
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.gameObject == Player)
+            {
+                print("worked");
+                speed = 5;
             }
 
         }

@@ -5,57 +5,59 @@ using UnityEngine.UI;
 
 public class PlatformButton : MonoBehaviour
 {
-    public GameObject uiText;
+    private bool Overlap = false;
 
     public Material Red;
     public Material Green;
 
     public bool On = true;
 
-    private GameObject Button;
-    
+    public GameObject Button;
 
+    public GameObject platform;
 
     // Start is called before the first frame update
     void Start()
     {
-
-
+   
     }
 
     private bool InOverlap
     {
         get
         {
-            return uiText.activeInHierarchy;
+            return Overlap;
         }
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (InOverlap && On && Input.GetButtonDown("Interact"))
+        if (InOverlap && !On && Input.GetButtonDown("Interact"))
         {
+            platform.transform.GetComponent<Follow>().speed = 0;
             Button.GetComponent<MeshRenderer>().material = Red;
+            On = true;
 
+        }
+        else if (InOverlap && On && Input.GetButtonDown("Interact"))
+        {
+            platform.transform.GetComponent<Follow>().speed = 5;
+            Button.GetComponent<MeshRenderer>().material = Green;
             On = false;
 
         }
-        else if (InOverlap && !On && Input.GetButtonDown("Interact"))
-        {
-            Button.GetComponent<MeshRenderer>().material = Green;
 
-            On = true;
-        }
+
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        uiText.SetActive(true);
+        Overlap = true;
     }
 
     private void OnTriggerExit(Collider other)
     {
-        uiText.SetActive(false);
+        Overlap = false;
     }
 }

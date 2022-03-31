@@ -19,7 +19,7 @@ public class Teleport : MonoBehaviour
         
     }
 
-    private void OnTriggerEnter(Collider other)
+    void OnTriggerEnter(Collider other)
     {
         Debug.Log("yes");
         Player.transform.position = Checkpoint.transform.position;
