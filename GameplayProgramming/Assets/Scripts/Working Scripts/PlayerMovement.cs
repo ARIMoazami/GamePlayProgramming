@@ -45,6 +45,8 @@ public class PlayerMovement : MonoBehaviour
 
     private bool EnemyLock = false;
 
+    public bool Spline = false;
+
 
     void Awake()
     {
@@ -97,7 +99,11 @@ public class PlayerMovement : MonoBehaviour
         {
             float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
             float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
-            transform.rotation = Quaternion.Euler(0f, angle, 0f);
+            if(!Spline)
+            {
+                transform.rotation = Quaternion.Euler(0f, angle, 0f);
+            }
+            
 
             Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
             controller.Move(moveDir.normalized * speed * Time.deltaTime);
@@ -115,6 +121,7 @@ public class PlayerMovement : MonoBehaviour
 
             Anim.SetBool("IsRunning", false);
             Anim.SetBool("IsIdle", true);
+            Anim.SetBool("Backwards", false);
         }
 
         Vector3 velocity = Vector3.forward * 0;
@@ -173,7 +180,6 @@ public class PlayerMovement : MonoBehaviour
             lockOnCam.SetActive(false);
             EnemyLock = false;
         }
-
 
     }
 
