@@ -8,6 +8,7 @@ public class BeginFight : MonoBehaviour
     public GameObject Enemy;
     public GameObject aiScript;
 
+
     // Start is called before the first frame update
     void Start()
     {
@@ -24,8 +25,11 @@ public class BeginFight : MonoBehaviour
     {
         if(other.tag == "Player")
         {
-            Enemy.GetComponent<EnemyPatrol>().enabled = false;
-            aiScript.GetComponent<AICombat>().enabled = true;
+            //Enemy.GetComponent<EnemyPatrol>().enabled = false;
+            //aiScript.GetComponent<AICombat>().enabled = true;
+
+            Enemy.GetComponent<AICombat>().Chase = true;
+            Enemy.GetComponent<AICombat>().Patrol = false;
         }
     }
 
@@ -33,8 +37,11 @@ public class BeginFight : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            Enemy.GetComponent<EnemyPatrol>().enabled = true;
-            aiScript.GetComponent<AICombat>().enabled = false;
+            //Enemy.GetComponent<EnemyPatrol>().enabled = true;
+            //aiScript.GetComponent<AICombat>().enabled = false;
+
+            Enemy.GetComponent<AICombat>().Chase = false;
+            Enemy.GetComponent<AICombat>().Patrol = true;
         }
             
     }
