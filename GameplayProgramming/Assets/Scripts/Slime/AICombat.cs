@@ -12,9 +12,12 @@ public class AICombat : MonoBehaviour
     Vector3 followTarget;
 
     public Transform Player;
+
     NavMeshAgent navMesh;
 
     public float speed;
+
+    public float Health;
 
     public bool Chase = false;
 
@@ -31,6 +34,11 @@ public class AICombat : MonoBehaviour
         navMesh.SetDestination(wayPoints[currentIndex].position);
     }
 
+    void Awake()
+    {
+        Player = GameObject.FindWithTag("Player").transform;
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -45,7 +53,7 @@ public class AICombat : MonoBehaviour
             {
                 IncreaseIndex();
             }
-            print(currentIndex);
+            
 
         }
     }
