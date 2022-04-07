@@ -14,12 +14,16 @@ public class TakeDamage : MonoBehaviour
 
     private bool death = false;
 
+    public Transform player;
+
+    public Healthbar healthbar;
+
     // Start is called before the first frame update
     void Start()
     {
         SlimeHealth = Slime.GetComponent<AICombat>().Health;
 
-        print(SlimeHealth);
+        healthbar.BaseHealth(SlimeHealth);
     }
 
     // Update is called once per frame
@@ -31,9 +35,10 @@ public class TakeDamage : MonoBehaviour
             if(Input.GetButtonDown("Attack"))
             {
                SlimeHealth -= 1;
-               print(SlimeHealth);
+                healthbar.Health(SlimeHealth);
             }
         }
+       
 
         if(SlimeHealth == 0)
         {

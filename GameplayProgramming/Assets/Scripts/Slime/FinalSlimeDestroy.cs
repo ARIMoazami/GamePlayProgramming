@@ -14,12 +14,14 @@ public class FinalSlimeDestroy : MonoBehaviour
 
     private bool death = false;
 
+    public Healthbar healthbar;
+
     // Start is called before the first frame update
     void Start()
     {
         SlimeHealth = Slime.GetComponent<AICombat>().Health;
 
-        print(SlimeHealth);
+        healthbar.BaseHealth(SlimeHealth);
     }
 
     void Awake()
@@ -36,7 +38,7 @@ public class FinalSlimeDestroy : MonoBehaviour
             if (Input.GetButtonDown("Attack"))
             {
                 SlimeHealth -= 1;
-                print(SlimeHealth);
+                healthbar.Health(SlimeHealth);
             }
         }
 
