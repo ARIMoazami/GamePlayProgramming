@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DoorButton : MonoBehaviour
+public class MainDoorButton : MonoBehaviour
 {
-    public GameObject UIText;
+    public GameObject MainUIText;
     public GameObject cutsceneCAM;
     public GameObject playerCAM;
 
@@ -12,27 +12,26 @@ public class DoorButton : MonoBehaviour
 
     public Animator doorAnim;
 
-    private bool DoorOpen = false;
+    private bool MainDoorOpen = false;
     private Animator buttonAnim;
 
 
     // Start is called before the first frame update
     void Start()
     {
-        buttonAnim = GetComponent<Animator>();
 
         cutsceneCAM.SetActive(false);
 
-        UIText.SetActive(false);
+        MainUIText.SetActive(false);
 
-       
+
     }
 
     private bool InOverlap
     {
         get
         {
-            return UIText.activeInHierarchy;
+            return MainUIText.activeInHierarchy;
         }
     }
 
@@ -40,9 +39,8 @@ public class DoorButton : MonoBehaviour
     void Update()
     {
 
-        if (InOverlap && !DoorOpen && Input.GetButtonDown("Interact"))
+        if (InOverlap && !MainDoorOpen && Input.GetButtonDown("Interact"))
         {
-            buttonAnim.SetTrigger("Pressed");
             cutsceneCAM.SetActive(true);
             playerCAM.SetActive(false);
             StartCoroutine(Opening());
@@ -50,12 +48,12 @@ public class DoorButton : MonoBehaviour
             Player.GetComponent<PlayerMovement>().enabled = false;
         }
 
-        if (DoorOpen)
+        if (MainDoorOpen)
         {
-            UIText.SetActive(false);
+            MainUIText.SetActive(false);
             GetComponent<BoxCollider>().enabled = false;
         }
-  
+
     }
 
     IEnumerator camReturn()
@@ -70,19 +68,19 @@ public class DoorButton : MonoBehaviour
     {
         yield return new WaitForSeconds(1);
         doorAnim.Play("DoorOpen");
-        DoorOpen = true;
+        MainDoorOpen = true;
         StartCoroutine(camReturn());
     }
 
-    
+
 
     private void OnTriggerEnter(Collider other)
     {
-        UIText.SetActive(true);
+        MainUIText.SetActive(true);
     }
 
     private void OnTriggerExit(Collider other)
     {
-        UIText.SetActive(false);
+        MainUIText.SetActive(false);
     }
 }
