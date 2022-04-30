@@ -67,7 +67,7 @@ public class MainDoorButton : MonoBehaviour
     IEnumerator Opening()
     {
         yield return new WaitForSeconds(1);
-        doorAnim.Play("DoorOpen");
+        doorAnim.Play("Gate");
         MainDoorOpen = true;
         StartCoroutine(camReturn());
     }
