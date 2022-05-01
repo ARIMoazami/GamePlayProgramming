@@ -32672,7 +32672,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5264447223814446243, guid: 57abfa4ad64167642b671adb7e92eb5b, type: 3}
       propertyPath: pointB_xpos
-      value: 8
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5264447223814446268, guid: 57abfa4ad64167642b671adb7e92eb5b, type: 3}
       propertyPath: m_Name
