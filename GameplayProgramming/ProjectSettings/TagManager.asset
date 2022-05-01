@@ -11,6 +11,8 @@ TagManager:
   - Enemy
   - Safepoint
   - Slime
+  - CoinText
+  - StrongAttackImage
   layers:
   - Default
   - TransparentFX
