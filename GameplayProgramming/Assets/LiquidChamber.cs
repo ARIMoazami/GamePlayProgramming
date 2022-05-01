@@ -15,25 +15,12 @@ public class LiquidChamber : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        gameObject.GetComponent<BoxCollider>().enabled = false;
-
         InteractText.SetActive(false);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(hasLiquid)
-        {
-            gameObject.GetComponent<BoxCollider>().enabled = true;
-        }
-
-        if(hasLiquid == false)
-        {
-            gameObject.GetComponent<BoxCollider>().enabled = false;
-            InteractText.SetActive(false);
-        }
-
         if(hasLiquid && inTrigger && Input.GetButtonDown("Interact"))
         {
             liquidLevel += 1;
