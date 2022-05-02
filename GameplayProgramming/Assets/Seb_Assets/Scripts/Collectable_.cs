@@ -28,6 +28,10 @@ public class Collectable_ : MonoBehaviour
     private Coin coin_script;
 
     
+    private MeshRenderer mesh_renderer;
+    private SphereCollider sphere_collider;
+
+    
     private void Start()
     {
         if (type.ToString() == "COIN")
@@ -42,12 +46,15 @@ public class Collectable_ : MonoBehaviour
         }
         
         player = GameObject.FindWithTag("Player");
+        mesh_renderer = gameObject.GetComponent<MeshRenderer>();
+        sphere_collider = gameObject.GetComponent<SphereCollider>();
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Player")
         {
+
             if (type.ToString() == "COIN")
             {
                 coin_script.pickupCoin();
@@ -58,11 +65,15 @@ public class Collectable_ : MonoBehaviour
                 powerup_script.callPowerup(powerup_type.ToString());
                 Debug.Log("Player has collected the " + powerup_type.ToString() + " powerup");
             }
-            
-            
 
-            Destroy(transform.gameObject);
+            disableCollectable();
         }
+    }
+
+    private void disableCollectable()
+    {
+        mesh_renderer.enabled = false;
+        sphere_collider.enabled = false;
     }
 
 

@@ -12,8 +12,14 @@ public class Powerup_StrongAttack : Powerup
 
     private Image UI_image;
 
+    private GameObject player;
+    private PlayerMovement player_script;
+
     private void Start()
     {
+        player = GameObject.FindWithTag("Player");
+        player_script = player.GetComponent<PlayerMovement>();
+
         UI_image_go = GameObject.FindWithTag("StrongAttackImage");
         UI_image = UI_image_go.GetComponent<Image>();
         UI_image_go.SetActive(false);
@@ -30,6 +36,7 @@ public class Powerup_StrongAttack : Powerup
 
     public override void enablePowerup()
     {
+        player_script.setStrongAttack(true);
         UI_image_go.SetActive(true);
         UI_image.canvasRenderer.SetAlpha(1.0f);
         UI_image.CrossFadeAlpha(0.0f, duration, false);
@@ -37,6 +44,8 @@ public class Powerup_StrongAttack : Powerup
 
     public override void disablePowerup()
     {
+        Debug.Log("Disabled Powerup");
+        player_script.setStrongAttack(false);
         UI_image_go.SetActive(false);
     }
 }

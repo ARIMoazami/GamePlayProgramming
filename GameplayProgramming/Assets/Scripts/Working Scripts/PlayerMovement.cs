@@ -47,6 +47,13 @@ public class PlayerMovement : MonoBehaviour
 
     public bool Spline = false;
 
+    //Collectable
+     /// Coin
+    private int coin_count = 0;
+    //Powerups
+    /// StrongAttack
+    public bool strong_attack_enabled = false;
+
 
     void Awake()
     {
@@ -211,6 +218,27 @@ public class PlayerMovement : MonoBehaviour
     void Interact(InputAction.CallbackContext context)
     {
         Anim.SetTrigger("Interact");
+    }
+
+    public int getCoins()
+    {
+        return coin_count;
+    }
+
+    public void setCoins(int coins)
+    {
+        coin_count = coins;
+    }
+
+    public bool getStrongAttack()
+    {
+        return strong_attack_enabled;
+    }
+
+    public void setStrongAttack(bool strong_attack_bool)
+    {
+        strong_attack_enabled = strong_attack_bool;
+        Debug.Log("strong attack is: " + strong_attack_enabled);
     }
 
 
