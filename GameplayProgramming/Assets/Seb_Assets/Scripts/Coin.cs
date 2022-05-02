@@ -6,8 +6,7 @@ using UnityEngine.UI;
 public class Coin : Collectable
 {
     public GameObject coin_text_go;
-
-    private Collectable_ collectable_class_script;
+    public int default_pickup_amount = 1;
 
     private Text coin_text_UI;
 
@@ -25,7 +24,6 @@ public class Coin : Collectable
 
         player = GameObject.FindWithTag("Player");
         player_script = player.GetComponent<PlayerMovement>();
-        collectable_class_script = gameObject.GetComponent<Collectable_>();
         coin_text_go = GameObject.FindWithTag("CoinText");
         current_number_of_coins = 0;
         coin_text_UI = coin_text_go.GetComponent<Text>();
@@ -39,12 +37,9 @@ public class Coin : Collectable
 
     public void pickupCoin()
     {
-        player_script.setCoins(player_script.getCoins() + collectable_class_script.coin_value);
-
+        player_script.setCoins(player_script.getCoins() + default_pickup_amount);
         current_number_of_coins = player_script.getCoins();
         updateCoinText();
-
-        Destroy(gameObject);
 
     }
 

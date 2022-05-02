@@ -19,9 +19,9 @@ public class Collectable_ : MonoBehaviour
         NONE,
         STRONGATTACK
     };
+    [Header("If powerup:")]
     public Powerup_Type powerup_type;
 
-    public int coin_value = 1;
 
     private GameObject player;
     private Powerup powerup_script;
@@ -30,7 +30,7 @@ public class Collectable_ : MonoBehaviour
     
     private MeshRenderer mesh_renderer;
     private SphereCollider sphere_collider;
-    private MeshCollider mesh_collider;
+
     
     private void Start()
     {
@@ -48,7 +48,6 @@ public class Collectable_ : MonoBehaviour
         player = GameObject.FindWithTag("Player");
         mesh_renderer = gameObject.GetComponent<MeshRenderer>();
         sphere_collider = gameObject.GetComponent<SphereCollider>();
-        mesh_collider = gameObject.GetComponent<MeshCollider>();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -75,8 +74,6 @@ public class Collectable_ : MonoBehaviour
     {
         mesh_renderer.enabled = false;
         sphere_collider.enabled = false;
-        mesh_collider.enabled = false;
-
     }
 
 
