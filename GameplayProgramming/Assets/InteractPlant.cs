@@ -14,6 +14,12 @@ public class InteractPlant : MonoBehaviour
 
     private bool Overlap = false;
 
+    public GameObject plant1;
+    public GameObject plant2;
+    public GameObject plant3;
+    public GameObject plant4;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -28,6 +34,10 @@ public class InteractPlant : MonoBehaviour
             Chamber.GetComponent<LiquidChamber>().hasLiquid = true;
             Plant.GetComponent<MeshRenderer>().material = deadPlant;
             PlantTrigger.GetComponent<BoxCollider>().isTrigger = false;
+            plant1.GetComponent<InteractPlant>().enabled = false;
+            plant2.GetComponent<InteractPlant>().enabled = false;
+            plant3.GetComponent<InteractPlant>().enabled = false;
+            plant4.GetComponent<InteractPlant>().enabled = false;
         }
     }
 

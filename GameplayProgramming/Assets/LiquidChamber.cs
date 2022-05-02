@@ -19,6 +19,13 @@ public class LiquidChamber : MonoBehaviour
     public int liquidLevel = 0;
 
     private bool inTrigger = false;
+
+    public GameObject plant1;
+    public GameObject plant2;
+    public GameObject plant3;
+    public GameObject plant4;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -36,6 +43,10 @@ public class LiquidChamber : MonoBehaviour
         {
             liquidLevel += 1;
             hasLiquid = false;
+            plant1.GetComponent<InteractPlant>().enabled = true;
+            plant2.GetComponent<InteractPlant>().enabled = true;
+            plant3.GetComponent<InteractPlant>().enabled = true;
+            plant4.GetComponent<InteractPlant>().enabled = true;
         }
 
         if (liquidLevel == 1)

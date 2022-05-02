@@ -61,6 +61,8 @@ public class PlayerMovement : MonoBehaviour
     private bool near_destructible = false;
     private GameObject destructible_object;
 
+    public int hasEssence = 0;
+
 
     void Awake()
     {
