@@ -5,8 +5,14 @@ using UnityEngine;
 public class LiquidChamber : MonoBehaviour
 {
     public GameObject InteractText;
+    public GameObject PortalGate;
+    public GameObject MainChamber;
 
     public Animator ChamberAnim;
+    public Animator gateAnim;
+
+    public GameObject playercam;
+    public GameObject cutscenecam;
 
     public bool hasLiquid = false;
     public int liquidLevel = 0;
@@ -16,6 +22,10 @@ public class LiquidChamber : MonoBehaviour
     void Start()
     {
         InteractText.SetActive(false);
+
+        cutscenecam.SetActive(false);
+
+        PortalGate.SetActive(false);
     }
 
     // Update is called once per frame
@@ -45,7 +55,28 @@ public class LiquidChamber : MonoBehaviour
         if (liquidLevel == 4)
         {
             ChamberAnim.Play("LiquidFinalLvl");
+            StartCoroutine(gateReveal());
         }
+
+    }
+
+    IEnumerator gateReveal()
+    {
+        yield return new WaitForSeconds(1.5f);
+        cutscenecam.SetActive(true);
+        playercam.SetActive(false);
+        PortalGate.SetActive(true);
+        gateAnim.Play("GateOpen");
+        MainChamber.transform.position = new Vector3(0,-11, 0);
+        liquidLevel = 0;
+        StartCoroutine(returnCam());
+    }
+
+    IEnumerator returnCam()
+    {
+        yield return new WaitForSeconds(2f);
+        playercam.SetActive(true);
+        cutscenecam.SetActive(false);
     }
 
     void OnTriggerEnter(Collider other)
