@@ -7,6 +7,7 @@ public class LiquidChamber : MonoBehaviour
     public GameObject InteractText;
     public GameObject PortalGate;
     public GameObject MainChamber;
+    public GameObject Player;
 
     public Animator ChamberAnim;
     public Animator gateAnim;
@@ -66,6 +67,7 @@ public class LiquidChamber : MonoBehaviour
         cutscenecam.SetActive(true);
         playercam.SetActive(false);
         PortalGate.SetActive(true);
+        Player.GetComponent<PlayerMovement>().enabled = false;
         gateAnim.Play("GateOpen");
         MainChamber.transform.position = new Vector3(0,-11, 0);
         liquidLevel = 0;
@@ -77,6 +79,7 @@ public class LiquidChamber : MonoBehaviour
         yield return new WaitForSeconds(2f);
         playercam.SetActive(true);
         cutscenecam.SetActive(false);
+        Player.GetComponent<PlayerMovement>().enabled = true;
     }
 
     void OnTriggerEnter(Collider other)
