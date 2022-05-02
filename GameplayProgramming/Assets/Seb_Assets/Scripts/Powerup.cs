@@ -23,7 +23,8 @@ public class Powerup : Collectable_
         {
             case "STRONGATTACK":
                 Debug.Log("Calling powerup: " + powerup_type);
-                StartCoroutine(powerup_strong_attack_script.StrongAttack());
+                powerup_strong_attack_script.StrongAttack();
+                Destroy(gameObject);
                 break;
 
             default:

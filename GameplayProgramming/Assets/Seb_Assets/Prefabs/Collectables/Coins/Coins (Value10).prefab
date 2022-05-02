@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &1144644713343063362
+--- !u!1 &6793682493357093955
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,47 +8,47 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1144644713343063365}
-  - component: {fileID: 1144644713343063366}
-  - component: {fileID: 1144644713343063367}
-  - component: {fileID: 1144644713343063364}
-  - component: {fileID: 1144644713343063369}
+  - component: {fileID: 6793682493356811847}
+  - component: {fileID: 6793682493358103151}
+  - component: {fileID: 6793682493359233197}
+  - component: {fileID: 6793682493866486831}
+  - component: {fileID: 6793682493866486830}
   m_Layer: 0
-  m_Name: Powerup_StrongAttack
+  m_Name: Coins (Value10)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &1144644713343063365
+--- !u!4 &6793682493356811847
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1144644713343063362}
+  m_GameObject: {fileID: 6793682493357093955}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.65012646, y: 13.44932, z: -2.3326874}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 8.46722, y: 1.8608527, z: -143.23883}
+  m_LocalScale: {x: 4, y: 4, z: 4}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &1144644713343063366
+--- !u!33 &6793682493358103151
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1144644713343063362}
-  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
---- !u!23 &1144644713343063367
+  m_GameObject: {fileID: 6793682493357093955}
+  m_Mesh: {fileID: 4300000, guid: 1e24da1124da60645a1e704395b554e7, type: 3}
+--- !u!23 &6793682493359233197
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1144644713343063362}
+  m_GameObject: {fileID: 6793682493357093955}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -62,7 +62,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 208bda485ca2f424e82410715231f93b, type: 2}
+  - {fileID: 2100000, guid: c6f23257e2000544fb49aae2191692aa, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -74,7 +74,7 @@ MeshRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
+  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
@@ -84,30 +84,31 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!135 &1144644713343063364
-SphereCollider:
+--- !u!65 &6793682493866486831
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1144644713343063362}
+  m_GameObject: {fileID: 6793682493357093955}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1144644713343063369
+  m_Size: {x: 0.463179, y: 0.32788086, z: 0.52996826}
+  m_Center: {x: -0.0065740943, y: 0.16394043, z: 0.0005187988}
+--- !u!114 &6793682493866486830
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1144644713343063362}
+  m_GameObject: {fileID: 6793682493357093955}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: efda7dab63f9d714189f7f5c3009d0cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 1
-  powerup_type: 1
+  type: 0
+  powerup_type: 0
+  coin_value: 10
