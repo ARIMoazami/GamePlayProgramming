@@ -18,6 +18,9 @@ public class PlayerMovement : MonoBehaviour
     public GameObject playerCam;
     public GameObject lockOnCam;
 
+    public GameObject jumpPowerUp;
+    public Transform powerupLocation;
+
     Animator Anim;
     PlayerControls controls;
 
@@ -41,7 +44,7 @@ public class PlayerMovement : MonoBehaviour
 
     //jumping
     private float JumpCount = 1;
-    private float doublejumpTimer = 4;
+    private float doublejumpTimer = 20;
 
     private bool EnemyLock = false;
 
@@ -157,9 +160,10 @@ public class PlayerMovement : MonoBehaviour
             if (doublejumpTimer <= 0)
             {
                 JumpCount = 1;
-                doublejumpTimer = 4;
+                doublejumpTimer = 20;
                 doublejump = false;
                 ParticleEffect.SetActive(false);
+                Instantiate(jumpPowerUp, powerupLocation);
             }
         }
 
