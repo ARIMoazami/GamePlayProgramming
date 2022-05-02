@@ -14,6 +14,7 @@ TagManager:
   - CoinText
   - StrongAttackImage
   - StrengthText
+  - Destructible
   layers:
   - Default
   - TransparentFX

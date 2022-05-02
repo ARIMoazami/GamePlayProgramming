@@ -52,8 +52,11 @@ public class PlayerMovement : MonoBehaviour
     private int coin_count = 0;
     //Powerups
     /// StrongAttack
-    public bool strong_attack_enabled = false;
+    private bool strong_attack_enabled = false;
 
+    //Destructible
+    private bool near_destructible = false;
+    private GameObject destructible_object;
 
     void Awake()
     {
@@ -203,6 +206,13 @@ public class PlayerMovement : MonoBehaviour
             doublejump = true;
             Destroy(other.gameObject);
         }
+
+        if (other.tag == "Destructible")
+
+        {
+            near_destructible = true;
+            destructible_object = other.gameObject;
+        }
     }
 
     void Roll(InputAction.CallbackContext context)
@@ -213,11 +223,31 @@ public class PlayerMovement : MonoBehaviour
     void Attack(InputAction.CallbackContext context)
     {
         Anim.SetTrigger("Attack");
+
+        if(strong_attack_enabled && near_destructible)
+        {
+            //0.8f to match attack animation finish
+            StartCoroutine(DestroyDestructible(0.8f));
+        }
+
+    }
+
+    IEnumerator DestroyDestructible(float duration_to_wait)
+    {
+        yield return new WaitForSeconds(duration_to_wait);
+        Destroy(destructible_object);
+        destructible_object = null;
     }
 
     void Interact(InputAction.CallbackContext context)
     {
         Anim.SetTrigger("Interact");
+
+        if (strong_attack_enabled && near_destructible)
+        {
+            //~0.7f to match attack animation finish
+            StartCoroutine(DestroyDestructible(0.7f));
+        }
     }
 
     public int getCoins()
@@ -238,9 +268,7 @@ public class PlayerMovement : MonoBehaviour
     public void setStrongAttack(bool strong_attack_bool)
     {
         strong_attack_enabled = strong_attack_bool;
-        Debug.Log("strong attack is: " + strong_attack_enabled);
     }
-
 
 
 }

@@ -103077,7 +103077,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh107160
+  m_Name: pb_Mesh254764
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -105680,13 +105680,40 @@ GameObject:
   - component: {fileID: 1950746214}
   - component: {fileID: 1951799798}
   - component: {fileID: 64786734410764718}
+  - component: {fileID: 1953957261}
+  - component: {fileID: 1953957262}
   m_Layer: 0
   m_Name: DestructibleWall
-  m_TagString: Untagged
+  m_TagString: Destructible
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!65 &1953957261
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1953957260}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 6.0007124, y: 1.4223046, z: 4.445433}
+  m_Center: {x: -0.19510585, y: 0.7111523, z: -0.023707228}
+--- !u!114 &1953957262
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1953957260}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46eb7c6305ce3274f937c81807a6d7a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1954284990
 GameObject:
   m_ObjectHideFlags: 0
@@ -124429,7 +124456,6 @@ MonoBehaviour:
   yDirection: 0
   jumpNo: 0
   Spline: 0
-  strong_attack_enabled: 0
 --- !u!95 &5427230674370556106
 Animator:
   serializedVersion: 3
@@ -124607,8 +124633,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5427230674379834055}
-  m_LocalRotation: {x: 0.16829407, y: 0.77557474, z: -0.23208344, w: 0.5624039}
-  m_LocalPosition: {x: 0, y: 0.0000023841858, z: 0}
+  m_LocalRotation: {x: 0.16829406, y: 0.7755748, z: -0.23208342, w: 0.5624039}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 5427230675597595021}

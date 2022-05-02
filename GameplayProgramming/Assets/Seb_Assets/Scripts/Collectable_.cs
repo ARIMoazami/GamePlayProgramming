@@ -59,12 +59,12 @@ public class Collectable_ : MonoBehaviour
             if (type.ToString() == "COIN")
             {
                 coin_script.pickupCoin();
-                Debug.Log("Player has collected a coin");
+                //Debug.Log("Player has collected a coin");
             }
             else if (type.ToString() == "POWERUP")
             {
                 powerup_script.callPowerup(powerup_type.ToString());
-                Debug.Log("Player has collected the " + powerup_type.ToString() + " powerup");
+                //Debug.Log("Player has collected the " + powerup_type.ToString() + " powerup");
             }
 
             disableCollectable();
