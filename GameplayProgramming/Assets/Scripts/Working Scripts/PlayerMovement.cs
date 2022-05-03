@@ -9,11 +9,15 @@ public class PlayerMovement : MonoBehaviour
     private float moveX;
     private float moveY;
 
+    public GameObject doublejumpUI;
+
     public CharacterController controller;
     public Transform cam;
     public TrailRenderer TrailEffect;
     public GameObject ParticleEffect;
 
+    public GameObject darkwall;
+    public GameObject breakwallui;
 
     public GameObject playerCam;
     public GameObject lockOnCam;
@@ -63,6 +67,8 @@ public class PlayerMovement : MonoBehaviour
 
     public int hasEssence = 0;
 
+    private int frame = 0;
+
 
     void Awake()
     {
@@ -84,7 +90,6 @@ public class PlayerMovement : MonoBehaviour
     }
     void Start()
     {
-
     }
     private void OnMove(InputValue movementValue)
     {
@@ -93,6 +98,30 @@ public class PlayerMovement : MonoBehaviour
         moveX = moveVector.x;
         moveY = moveVector.y;
 
+    }
+
+    void FixedUpdate()
+    {
+        if (controller.isGrounded)
+        {
+            yDirection = 0f;
+            jumpNo = 0;
+            Anim.SetBool("IsJumping", false);
+            Anim.SetBool("HasLanded", true);
+        }
+        else
+        {
+            if(frame == 60)
+            {
+                yDirection = 0f;
+                jumpNo = 0;
+                Anim.SetBool("IsJumping", false);
+                Anim.SetBool("HasLanded", true);
+                frame = 0;
+            }
+
+            frame++;
+        }
     }
     // Update is called once per frame
     void Update()
@@ -103,13 +132,7 @@ public class PlayerMovement : MonoBehaviour
         Vector3 direction = new Vector3(moveX, 0f, moveY).normalized;
         //controller.SimpleMove(Vector3.forward * 0);
 
-        if(controller.isGrounded)
-        {
-            yDirection = 0f;
-            jumpNo = 0;
-            Anim.SetBool("IsJumping", false);
-            Anim.SetBool("HasLanded", true);
-        }
+       
 
         if (direction.magnitude >= 0.1f)
         {
@@ -163,6 +186,7 @@ public class PlayerMovement : MonoBehaviour
             JumpCount = 2;
             doublejumpTimer -= Time.deltaTime;
             ParticleEffect.SetActive(true);
+            doublejumpUI.SetActive(true);
             if (doublejumpTimer <= 0)
             {
                 JumpCount = 1;
@@ -170,6 +194,7 @@ public class PlayerMovement : MonoBehaviour
                 doublejump = false;
                 ParticleEffect.SetActive(false);
                 Instantiate(jumpPowerUp, powerupLocation);
+                doublejumpUI.SetActive(false);
             }
         }
 
@@ -196,6 +221,11 @@ public class PlayerMovement : MonoBehaviour
             playerCam.SetActive(true);
             lockOnCam.SetActive(false);
             EnemyLock = false;
+        }
+
+        if(darkwall.gameObject == null)
+        {
+            breakwallui.SetActive(false);
         }
 
     }
