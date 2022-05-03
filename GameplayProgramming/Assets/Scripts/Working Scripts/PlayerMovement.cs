@@ -69,7 +69,6 @@ public class PlayerMovement : MonoBehaviour
 
     private int frame = 0;
 
-
     void Awake()
     {
         Anim = GetComponent<Animator>();
@@ -90,6 +89,9 @@ public class PlayerMovement : MonoBehaviour
     }
     void Start()
     {
+        Application.targetFrameRate = 240;
+        QualitySettings.vSyncCount = 0;
+
     }
     private void OnMove(InputValue movementValue)
     {
@@ -223,10 +225,11 @@ public class PlayerMovement : MonoBehaviour
             EnemyLock = false;
         }
 
-        if(darkwall.gameObject == null)
+        if (darkwall.gameObject == null)
         {
             breakwallui.SetActive(false);
         }
+
 
     }
 
